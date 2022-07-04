@@ -1,0 +1,110 @@
+openapi: 3.0.0
+info:
+  title: Tower API
+  description: 'API for validating and retrieving Credit Card data.'
+  version: 1.0.0
+  
+servers:
+- url: https://tower.co.nz/api
+- url: http://tower.co.nz/api
+
+tags:
+- name: CreditCards
+  description: Everything about your Pets
+
+paths:
+  /creditCards:
+    get:
+      tags:
+      - CreditCards
+      summary: Finds CreditCards stored in DB based on input
+      description: Finds credit cards based on the input
+      operationId: findCreditCards
+      parameters:
+      - name: name
+        in: query
+        description: Credit card holder name
+        required: false
+        schema:
+          type: string
+          maxLength: 50
+      - name: creditCardNumber
+        in: query
+        description: Credit Card Number
+        required: false
+        schema:
+          type: integer
+      - name: cvc
+        in: query
+        description: Card Verification Code
+        required: false
+        schema:
+          type: string
+      - name: expiryDate
+        in: query
+        description: Expiry date of the card
+        required: false
+        schema:
+          type: string
+          format: date
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreditCard'
+        404:
+          description: "Not Found"
+        500:
+          description: "Internal Server Error"
+  
+    post:
+      tags:
+      - CreditCards
+      summary: Finds all CreditCards stored in DB
+      description: Stores details of a credit card
+      operationId: insertCreditCard
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreditCard'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreditCard'
+        404:
+          description: "Insertion error using input paramaters"
+        500:
+          description: "Internal Server Error"
+
+
+components:
+  securitySchemes:
+    cookieAuth: #arbitrary name for the security scheme; will be used in the "security" key later
+      type: apiKey
+      in: cookie
+      name: APISESSIONID
+
+  schemas:
+    CreditCard:
+      type: object
+      properties:
+        name:
+          type: string
+        creditCardNumber:
+          type: string
+        cvc:
+          type: string
+        expiryDate:
+          type: string
+          format: date
+  
+  
