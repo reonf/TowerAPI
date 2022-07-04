@@ -53,7 +53,18 @@ public class CreditCardsApiController implements CreditCardsApi {
     }
 
     public ResponseEntity<Void> findAllCreditCards(@Size(max=50) @Parameter(in = ParameterIn.QUERY, description = "Credit card holder name" ,schema=@Schema()) @Valid @RequestParam(value = "name", required = false) String name,@Parameter(in = ParameterIn.QUERY, description = "Credit Card Number" ,schema=@Schema()) @Valid @RequestParam(value = "creditCardNumber", required = false) Integer creditCardNumber,@Parameter(in = ParameterIn.QUERY, description = "Card Verification Code" ,schema=@Schema()) @Valid @RequestParam(value = "cvc", required = false) String cvc,@Parameter(in = ParameterIn.QUERY, description = "Expiry date of the card" ,schema=@Schema()) @Valid @RequestParam(value = "expiryDate", required = false) LocalDate expiryDate) {
-        String accept = request.getHeader("Accept");
+
+        //I realize this code does not function but I ran out of time setting up my
+        //environments, as I haven't developed java on my home pc in a while.
+
+        //I have only created one operation due to time constraint, however this
+        //allows for the functionality of the two get operations
+
+        //I would like to integrate a DB system as well as add unit
+        //testing if I had time to make this project functional
+
+        //Call creditCardsApiService.findAllCreditCards() and return
+
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
