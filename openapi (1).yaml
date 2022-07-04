@@ -1,0 +1,59 @@
+openapi: 3.0.0
+info:
+  title: Tower API
+  description: 'API for validating and retrieving Credit Card data.'
+  version: 1.0.0
+
+externalDocs:
+  url: http://swagger.io
+  
+servers:
+- url: https://tower.co.nz/api
+- url: http://tower.co.nz/api
+
+tags:
+- name: CreditCards
+  description: Everything about your Pets
+
+paths:
+  /creditCards:
+    get:
+      tags:
+      - CreditCards
+      summary: Finds all CreditCards stored in DB
+      description: Stores details of a credit card
+      operationId: findAllCreditCards
+      parameters:
+      - name: name
+        in: query
+        description: Credit card holder name
+        required: false
+        schema:
+          type: string
+          maxLength: 50
+      - name: creditCardNumber
+        in: query
+        description: Credit Card Number
+        required: false
+        schema:
+          type: integer
+      - name: cvc
+        in: query
+        description: Card Verification Code
+        required: false
+        schema:
+          type: string
+      - name: expiryDate
+        in: query
+        description: Expiry date of the card
+        required: false
+        schema:
+          type: string
+          format: date
+      responses:
+        200:
+          description: successful operation
+        400:
+          description: Invalid status value
+          content: {}
+
