@@ -65,6 +65,10 @@ public class CreditCardsApiController implements CreditCardsApi {
 
         //Call creditCardsApiService.findAllCreditCards() and return
 
+        //creditCardNumber should not be integer. This was generated from swagger editor as a
+        //project so I do not have the rest_api.yml file to edit
+        creditCardsApiService.findAllCreditCards(name, "", cvc, expiryDate);
+
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
